@@ -1,20 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import downArrow from './images/downArrow.svg'
-import Graph from './Graph'
-
-// interface Exercise {
-//   Date: number;
-//   Person: string;
-//   Type: string;
-//   Weight: number;
-//   Reps: number;
-// }
+import Workout from './Workout'
 
 export default function Dashboard(props) {
 
   const [profileOpen, setProfileOpen] = useState(false)
-
-  const profileRef = useRef()
 
   function logout(e) {
     e.preventDefault()
@@ -29,11 +19,11 @@ export default function Dashboard(props) {
     props.history.push('/login')
   }
 
-console.log(props);
-
   useEffect(() => {
-    if(props.profile.Username === "") {
-      if(localStorage.length === 0) {
+    document.title = `${props.profile.Username}'s Dashboard | Workout Tracker`
+
+    if (props.profile.Username === "") {
+      if (localStorage.length === 0) {
         props.history.push('./signup')
       } else {
         let profile = JSON.parse(localStorage.getItem('profile'))
@@ -78,21 +68,29 @@ console.log(props);
     //     // Errors are reported here
     //     console.log(error);
     //   });
+    // eslint-disable-next-line
   }, [])
 
-
+  
+  
   let data = [
     { Date: "1625185037699", Person: "Luke Sutor", Reps: "2", Type: "Bench Press", Weight: "225" },
     { Date: "1625185346674", Person: "Luke Sutor", Reps: "-1", Type: "Weight", Weight: "209" },
     { Date: "1625185446674", Person: "Luke Sutor", Reps: "8", Type: "Bench Press", Weight: "185" },
     { Date: "1625185546974", Person: "Luke Sutor", Reps: "5", Type: "Bench Press", Weight: "205" }
-  ]  
+  ]
+
+
+  let types = props.profile.Types.split(',')
+  const listedTypes = types.map((type) =>
+      <Workout data={data} type={type} />
+  );
 
   return (
     <div>
-      <div className="flex flex-row justify-between bg-orange px-8 py-4 rounded-b-xl text-white">
+      <div className="flex flex-row justify-between bg-orange px-8 py-4 rounded-b-xl text-white shadow-lg">
         <h1 className="text-2xl font-bold">Dashboard</h1>
-        <button ref={profileRef} onClick={() => setProfileOpen(!profileOpen)}
+        <button onClick={() => setProfileOpen(!profileOpen)}
           className="relative hover:text-gray-200 focus:outline-none inline-flex">{props.profile?.Username}
           <img className={`w-6 my-auto ${profileOpen ? "pr-2 transform rotate-180" : "pl-2"}`} src={downArrow} alt="" />
           <div className={`absolute top-full flex flex-col bg-gray-50 text-black text-left px-4 py-2 whitespace-nowrap rounded-lg ring-1 ring-black ring-opacity-5 ${profileOpen ? "" : "hidden"}`}>
@@ -101,7 +99,7 @@ console.log(props);
           </div>
         </button>
       </div>
-      <Graph data={data} type="Bench Press" />
+      <div>{listedTypes}</div>
     </div>
   )
 }

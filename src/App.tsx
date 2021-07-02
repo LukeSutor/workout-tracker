@@ -14,13 +14,15 @@ export default function App() {
   });
 
   return (
-    <HashRouter basename='/'>
-      <Route exact path='/'>
-        <Redirect to='/signup' />
-      </Route>
-      <Route path='/signup' render={props => <Signup {...props} setProfile={setProfile} />}/>
-      <Route path='/login' render={props => <Login {...props} setProfile={setProfile} />} />
-      <Route path='/dashboard' render={props => <Dashboard {...props} setProfile={setProfile} profile={profile} />} />
-    </HashRouter>
+    <div className="bg-background">
+      <HashRouter basename='/'>
+        <Route exact path='/'>
+          <Redirect to='/signup' />
+        </Route>
+        <Route path='/signup' render={props => <Signup {...props} setProfile={setProfile} />} />
+        <Route path='/login' render={props => <Login {...props} setProfile={setProfile} />} />
+        <Route path='/dashboard' render={props => <Dashboard {...props} setProfile={setProfile} profile={profile} />} />
+      </HashRouter>
+    </div>
   );
 }

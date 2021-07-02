@@ -4,6 +4,8 @@ export default function Login(props) {
 
     // Check localStorage to see if the person's profile is saved there
     useEffect(() => {
+      document.title = "Log In | Workout Tracker"
+      
       if(localStorage.length === 0) {
         return
       } else {

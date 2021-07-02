@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import {Redirect} from 'react-router-dom';
 
 interface Profile {
   Email: string;
@@ -12,6 +11,8 @@ export default function Signup(props) {
 
   // Check localStorage to see if the person's profile is saved there
   useEffect(() => {
+    document.title = "Sign Up | Workout Tracker"
+    
     if(localStorage.length === 0) {
       return
     } else {
@@ -44,7 +45,7 @@ export default function Signup(props) {
       Email: email,
       Username: username,
       Password: password,
-      Types: types + ",Weight"
+      Types: "Weight,"+types
     }
 
     fetch("https://sheet.best/api/sheets/f9a8b3ec-30d1-429b-861c-2e885f120f02", {
@@ -65,10 +66,10 @@ export default function Signup(props) {
         console.log(error);
       });
 
-      <Redirect to='/dashboard' />
+      props.setProfile(profile)
+      props.history.push('/dashboard')
   }
 
-  console.log(props);
   
   return (
     <div>
