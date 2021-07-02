@@ -4,7 +4,7 @@ export default function Login(props) {
 
     // Check localStorage to see if the person's profile is saved there
     useEffect(() => {
-      if(localStorage.length == 0) {
+      if(localStorage.length === 0) {
         return
       } else {
         let profile = JSON.parse(localStorage.getItem('profile'))
@@ -13,6 +13,7 @@ export default function Login(props) {
 
         console.log("Account found, automatically logging in");
       }
+      // eslint-disable-next-line
     }, [])
   
   function handleSubmit(e): void {
@@ -27,7 +28,7 @@ export default function Login(props) {
         if(data[0].Username === username) {
           console.log("successful login");
 
-          if(localStorage.getItem('profile') == null) {
+          if(localStorage.getItem('profile') === null) {
             localStorage.setItem('profile', JSON.stringify(data))
           }
 

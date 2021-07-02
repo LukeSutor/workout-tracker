@@ -8,7 +8,7 @@ export default function Graph(props) {
   function extractWeights(): number[] {
     let weights = []
     
-    data.map(data => {
+    data.forEach(data => {
       if(data.Type === type) { 
         weights.push(data.Weight);
       }
@@ -20,7 +20,7 @@ export default function Graph(props) {
   function extractDates(): Date[] {
     let dates = []
     
-    data.map(data => {
+    data.forEach(data => {
       if(data.Type === type) {
         let date = new Date(parseInt(data.Date)).toDateString();
         

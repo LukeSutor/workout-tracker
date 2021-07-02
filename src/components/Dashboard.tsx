@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import Graph from './Graph'
 
-interface Exercise {
-  Date: number;
-  Person: string;
-  Type: string;
-  Weight: number;
-  Reps: number;
-}
+// interface Exercise {
+//   Date: number;
+//   Person: string;
+//   Type: string;
+//   Weight: number;
+//   Reps: number;
+// }
 
 export default function Dashboard(props) {
 
