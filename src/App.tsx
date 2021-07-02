@@ -20,7 +20,7 @@ export default function App() {
       </Route>
       <Route path='/signup' render={props => <Signup {...props} setProfile={setProfile} />}/>
       <Route path='/login' render={props => <Login {...props} setProfile={setProfile} />} />
-      <Route path='/dashboard' render={props => <Dashboard {...props} profile={profile} />} />
+      <Route path='/dashboard' render={props => <Dashboard {...props} setProfile={setProfile} profile={profile} />} />
     </HashRouter>
   );
 }

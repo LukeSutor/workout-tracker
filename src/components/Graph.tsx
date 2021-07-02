@@ -55,7 +55,7 @@ export default function Graph(props) {
                 data: extractWeights(),
                 lineTension: 0,
                 fill: false,
-                borderColor: 'rgb(59, 170, 197)'
+                borderColor: '#FF6701'
               },
             ]
           }}

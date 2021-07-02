@@ -16,7 +16,7 @@ export default function Signup(props) {
       return
     } else {
       let profile = JSON.parse(localStorage.getItem('profile'))
-      props.setProfile(profile)
+      props.setProfile(profile[0])
       props.history.push('/dashboard')
 
       console.log("Account found, automatically logging in");

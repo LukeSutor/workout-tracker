@@ -8,7 +8,7 @@ export default function Login(props) {
         return
       } else {
         let profile = JSON.parse(localStorage.getItem('profile'))
-        props.setProfile(profile)
+        props.setProfile(profile[0])
         props.history.push('/dashboard')
 
         console.log("Account found, automatically logging in");
@@ -31,6 +31,8 @@ export default function Login(props) {
           if(localStorage.getItem('profile') === null) {
             localStorage.setItem('profile', JSON.stringify(data))
           }
+
+          props.setProfile(data[0])
 
           props.history.push('/dashboard')
         } else {
