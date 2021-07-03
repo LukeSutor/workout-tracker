@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import downArrow from './images/downArrow.svg'
 import Workout from './Workout'
+import AddWorkout from './AddWorkout'
 
 export default function Dashboard(props) {
 
@@ -18,7 +19,7 @@ export default function Dashboard(props) {
     })
     props.history.push('/login')
   }
-  
+
 
   useEffect(() => {
     if (props.profile?.Username === "") {
@@ -39,42 +40,14 @@ export default function Dashboard(props) {
     //   .catch((error) => {
     //     console.error(error);
     //   });
-
-
-    // let e: Exercise = {
-    //   Date: Date.now(),
-    //   Person: props.user,
-    //   Type: "Weight",
-    //   Weight: 158,
-    //   Reps: -1
-    // }
-
-
-    // fetch("https://sheet.best/api/sheets/801254c2-1797-4c47-a965-cd4c215ddc16", {
-    //   method: "POST",
-    //   mode: "cors",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(e),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     // The response comes here
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     // Errors are reported here
-    //     console.log(error);
-    //   });
     // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
     document.title = `${props.profile?.Username}'s Dashboard | Workout Tracker`
   }, [props.profile])
-  
-  
+
+
   let data = [
     { Date: "1620269894340", Person: "Luke Sutor", Reps: "2", Type: "Bench Press", Weight: "225" },
     { Date: "1625185346674", Person: "Luke Sutor", Reps: "-1", Type: "Bodyweight", Weight: "209" },
@@ -83,9 +56,9 @@ export default function Dashboard(props) {
   ]
 
 
-  let types = props.profile?.Types.split(',')
+  let types: string[] = props.profile?.Types.split(',')
   const listedTypes = types?.map((type) =>
-      <Workout data={data} type={type} />
+    <Workout key={data} data={data} type={type} />
   );
 
   return (
@@ -101,6 +74,7 @@ export default function Dashboard(props) {
           </div>
         </div>
       </div>
+      <AddWorkout types={types} profile={props.profile} />
       <div>{listedTypes}</div>
     </div>
   )
