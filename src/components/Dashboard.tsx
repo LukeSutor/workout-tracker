@@ -21,8 +21,6 @@ export default function Dashboard(props) {
   
 
   useEffect(() => {
-    document.title = `${props.profile?.Username}'s Dashboard | Workout Tracker`
-
     if (props.profile?.Username === "") {
       if (localStorage.length === 0) {
         props.history.push('./signup')
@@ -72,6 +70,9 @@ export default function Dashboard(props) {
     // eslint-disable-next-line
   }, [])
 
+  useEffect(() => {
+    document.title = `${props.profile?.Username}'s Dashboard | Workout Tracker`
+  }, [props.profile])
   
   
   let data = [
@@ -82,8 +83,8 @@ export default function Dashboard(props) {
   ]
 
 
-  let types = props.profile.Types.split(',')
-  const listedTypes = types.map((type) =>
+  let types = props.profile?.Types.split(',')
+  const listedTypes = types?.map((type) =>
       <Workout data={data} type={type} />
   );
 
@@ -91,14 +92,14 @@ export default function Dashboard(props) {
     <div>
       <div className="flex flex-row justify-between bg-orange px-8 py-4 rounded-b-xl text-white shadow-lg">
         <h1 className="text-2xl font-bold">Dashboard</h1>
-        <button onClick={() => setProfileOpen(!profileOpen)}
+        <div onClick={() => setProfileOpen(!profileOpen)}
           className="relative text-lg hover:text-gray-200 focus:outline-none inline-flex">{props.profile?.Username}
           <img className={`w-6 my-auto ${profileOpen ? "pr-2 transform rotate-180" : "pl-2"}`} src={downArrow} alt="" />
-          <div className={`absolute top-full flex flex-col bg-gray-50 text-black text-left px-4 py-2 whitespace-nowrap rounded-lg ring-1 ring-black ring-opacity-5 ${profileOpen ? "" : "hidden"}`}>
-            <button onClick={e => logout(e)}>Log out</button>
-            <button>Edit Profile</button>
+          <div className={`absolute top-full flex flex-col bg-gray-50 text-black px-4 py-2 whitespace-nowrap rounded-lg ring-1 ring-black ring-opacity-5 ${profileOpen ? "" : "hidden"}`}>
+            <button onClick={e => logout(e)} className="mr-auto">Log out</button>
+            <button onClick={() => props.history.push('/editprofile')} className="mr-auto">Edit Profile</button>
           </div>
-        </button>
+        </div>
       </div>
       <div>{listedTypes}</div>
     </div>

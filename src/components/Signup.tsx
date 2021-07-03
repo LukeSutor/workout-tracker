@@ -58,11 +58,9 @@ export default function Signup(props) {
     })
       .then((res) => res.json())
       .then((data) => {
-        // The response comes here
         console.log(data);
       })
       .catch((error) => {
-        // Errors are reported here
         console.log(error);
       });
 
