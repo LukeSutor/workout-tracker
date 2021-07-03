@@ -18,11 +18,12 @@ export default function Dashboard(props) {
     })
     props.history.push('/login')
   }
+  
 
   useEffect(() => {
-    document.title = `${props.profile.Username}'s Dashboard | Workout Tracker`
+    document.title = `${props.profile?.Username}'s Dashboard | Workout Tracker`
 
-    if (props.profile.Username === "") {
+    if (props.profile?.Username === "") {
       if (localStorage.length === 0) {
         props.history.push('./signup')
       } else {
@@ -74,8 +75,8 @@ export default function Dashboard(props) {
   
   
   let data = [
-    { Date: "1625185037699", Person: "Luke Sutor", Reps: "2", Type: "Bench Press", Weight: "225" },
-    { Date: "1625185346674", Person: "Luke Sutor", Reps: "-1", Type: "Weight", Weight: "209" },
+    { Date: "1620269894340", Person: "Luke Sutor", Reps: "2", Type: "Bench Press", Weight: "225" },
+    { Date: "1625185346674", Person: "Luke Sutor", Reps: "-1", Type: "Bodyweight", Weight: "209" },
     { Date: "1625185446674", Person: "Luke Sutor", Reps: "8", Type: "Bench Press", Weight: "185" },
     { Date: "1625185546974", Person: "Luke Sutor", Reps: "5", Type: "Bench Press", Weight: "205" }
   ]
@@ -91,7 +92,7 @@ export default function Dashboard(props) {
       <div className="flex flex-row justify-between bg-orange px-8 py-4 rounded-b-xl text-white shadow-lg">
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <button onClick={() => setProfileOpen(!profileOpen)}
-          className="relative hover:text-gray-200 focus:outline-none inline-flex">{props.profile?.Username}
+          className="relative text-lg hover:text-gray-200 focus:outline-none inline-flex">{props.profile?.Username}
           <img className={`w-6 my-auto ${profileOpen ? "pr-2 transform rotate-180" : "pl-2"}`} src={downArrow} alt="" />
           <div className={`absolute top-full flex flex-col bg-gray-50 text-black text-left px-4 py-2 whitespace-nowrap rounded-lg ring-1 ring-black ring-opacity-5 ${profileOpen ? "" : "hidden"}`}>
             <button onClick={e => logout(e)}>Log out</button>

@@ -12,8 +12,8 @@ export default function Signup(props) {
   // Check localStorage to see if the person's profile is saved there
   useEffect(() => {
     document.title = "Sign Up | Workout Tracker"
-    
-    if(localStorage.length === 0) {
+
+    if (localStorage.length === 0) {
       return
     } else {
       let profile = JSON.parse(localStorage.getItem('profile'))
@@ -33,7 +33,7 @@ export default function Signup(props) {
     let password = (document.getElementById("password-input") as HTMLInputElement).value
     let types = (document.getElementById("types-input") as HTMLInputElement).value
 
-    if(email === "" || username === "" || password === "" || types === "") {
+    if (email === "" || username === "" || password === "" || types === "") {
       (document.getElementById("email-input") as HTMLInputElement).placeholder = "Required Field";
       (document.getElementById("username-input") as HTMLInputElement).placeholder = "Required Field";
       (document.getElementById("password-input") as HTMLInputElement).placeholder = "Required Field";
@@ -45,7 +45,7 @@ export default function Signup(props) {
       Email: email,
       Username: username,
       Password: password,
-      Types: "Weight,"+types
+      Types: "Bodyweight," + types
     }
 
     fetch("https://sheet.best/api/sheets/f9a8b3ec-30d1-429b-861c-2e885f120f02", {
@@ -66,24 +66,26 @@ export default function Signup(props) {
         console.log(error);
       });
 
-      props.setProfile(profile)
-      props.history.push('/dashboard')
+    props.setProfile(profile)
+    props.history.push('/dashboard')
   }
 
-  
+
   return (
-    <div>
-      <form className="flex flex-col">
-        <label>Email</label>
-        <input id="email-input" className="w-min border-b border-black focus:outline-none" />
-        <label>Username</label>
-        <input id="username-input" className="w-min border-b border-black focus:outline-none" />
-        <label>Password</label>
-        <input id="password-input" className="w-min border-b border-black focus:outline-none" />
-        <label>Workouts to track (enter comma spaced workouts. ex. Bench Press, Squats, Calf Raises)</label>
-        <input id="types-input" className="w-min border-b border-black focus:outline-none" />
-        <button onClick={e => handleSubmit(e)} className="text-left">Sign up</button>
-        <p>Already have an account? <button onClick={() => props.history.push('/login')}>Login</button></p>
+    <div className="bg-background h-screen">
+      <form className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col w-11/12 px-6 h-min bg-white rounded-lg -2 shadow-lg">
+        <h1 className="text-3xl text-center font-bold py-8">Welcome</h1>
+        <label className="text-sm">Email</label>
+        <input id="email-input" className="w-full border-b border-black focus:outline-none" />
+        <label className="text-sm pt-4">Username</label>
+        <input id="username-input" className="w-full border-b border-black focus:outline-none" />
+        <label className="text-sm pt-4">Password</label>
+        <input id="password-input" className="w-full border-b border-black focus:outline-none" />
+        <label className="text-sm pt-4">Workouts to track (comma separated)</label>
+        <input id="types-input" className="w-full border-b border-black focus:outline-none" placeholder="ex. Bench Press, Squats, Calf Raises"/>
+        <button onClick={e => handleSubmit(e)} className="w-full py-3 mt-6 mx-auto bg-orange text-xl text-white text-center font-bold rounded-lg whitespace-nowrap">Sign up</button>
+        <p className="py-4 text-center">Already have an account? <button onClick={() => props.history.push('/login')}
+        className="text-orange font-semibold">Log In</button></p>
       </form>
     </div>
   )
