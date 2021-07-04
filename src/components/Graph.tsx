@@ -54,7 +54,7 @@ export default function Graph(props) {
     })
 
     return weights
-  }  
+  }
 
   function extractDates(): Date[] {
     let dates = []
@@ -97,6 +97,18 @@ export default function Graph(props) {
     <div>
       {checkForData() ?
         <>
+          <div className="flex flex-row w-min bg-bluse text-white mt-2 mb-1 mx-auto rounded-full">
+            <button onClick={() => setFilter("1m")} className={`px-4 py-1 text-lg rounded-xl focus:outline-none rounded-full
+            ${filter === "1m" ? "bg-blue shadow-md" : "text-black"}`}>1m</button>
+            <button onClick={() => setFilter("3m")} className={`px-4 py-1 text-lg rounded-xl focus:outline-none rounded-full
+            ${filter === "3m" ? "bg-blue shadow-md" : "text-black"}`}>3m</button>
+            <button onClick={() => setFilter("6m")} className={`px-4 py-1 text-lg rounded-xl focus:outline-none rounded-full
+            ${filter === "6m" ? "bg-blue shadow-md" : "text-black"}`}>6m</button>
+            <button onClick={() => setFilter("1y")} className={`px-4 py-1 text-lg rounded-xl focus:outline-none rounded-full
+            ${filter === "1y" ? "bg-blue shadow-md" : "text-black"}`}>1y</button>
+            <button onClick={() => setFilter("all")} className={`px-4 py-1 text-lg rounded-xl focus:outline-none rounded-full
+            ${filter === "all" ? "bg-blue shadow-md" : "text-black"}`}>all</button>
+          </div>
           <div className="px-4">
             <Line
               type="line"
@@ -126,18 +138,7 @@ export default function Graph(props) {
               }}
             />
           </div>
-          <div className="flex flex-row justify-evenly pb-6 pt-1">
-            <button onClick={() => setFilter("1m")} className={`px-3 py-1 border text-lg rounded-xl focus:outline-none 
-            ${filter === "1m" ? "border-orange" : "border-black"}`}>1m</button>
-            <button onClick={() => setFilter("3m")} className={`px-3 py-1 border text-lg rounded-xl focus:outline-none 
-            ${filter === "3m" ? "border-orange" : "border-black"}`}>3m</button>
-            <button onClick={() => setFilter("6m")} className={`px-3 py-1 border text-lg rounded-xl focus:outline-none 
-            ${filter === "6m" ? "border-orange" : "border-black"}`}>6m</button>
-            <button onClick={() => setFilter("1y")} className={`px-3 py-1 border text-lg rounded-xl focus:outline-none 
-            ${filter === "1y" ? "border-orange" : "border-black"}`}>1y</button>
-            <button onClick={() => setFilter("all")} className={`px-3 py-1 border text-lg rounded-xl focus:outline-none 
-            ${filter === "all" ? "border-orange" : "border-black"}`}>all</button>
-          </div>
+
         </>
         :
         <>

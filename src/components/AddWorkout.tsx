@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import plus from './images/plus.svg'
-import downArrow from './images/black_downArrow.svg'
+import downArrow from './images/downArrow.svg'
 
 interface Workout {
   Date: number;
@@ -65,29 +65,30 @@ export default function AddWorkout(props) {
   }
 
   return (
-    <div className={`w-11/12 mx-auto bg-white my-8 shadow-lg rounded-xl ${expanded && "pb-6"}`}>
+    <div className={`w-screen mx-auto text-white bg-blue shadow-lg rounded-t-xl ${expanded && "pb-8"}`}>
       <div onClick={() => setExpanded(!expanded)} className="flex flex-row py-6">
         <img src={plus} alt="" className="w-8 px-1 transform ml-6" />
-        <p className="text-2xl font-bold ml-8">Add Data</p>
-        <img src={downArrow} alt="" className={`w-5 ml-auto mr-6 ${expanded ? "transform rotate-180" : ""}`} />
+        <p className="text-2xl font-bold ml-8">Add Session</p>
+        <img src={downArrow} alt="" className={`w-5 ml-auto mr-6 ${expanded ? "" : "transform rotate-180"}`} />
       </div>
       {expanded &&
         <div className="px-6">
+          <div className="relative bg-blue-light text-xl font-bold pl-4 py-2 mb-6 mt-2 rounded-lg" onClick={() => setSelectorOpen(!selectorOpen)}>
+            {selection !== "" ? `${selection}` : "Select Type"}
+            <div className={`absolute z-10 top-full max-h-32 overflow-scroll flex flex-col bg-blue-light text-white px-4 py-2 whitespace-nowrap rounded-lg ring-1 ring-black ring-opacity-5 ${selectorOpen ? "" : "hidden"}`}>{listedTypes}</div>
+          </div>
           <form className={`flex flex-row pb-4 ${selection === "Bodyweight" ? "" : "justify-between"}`}>
             <div className="w-5/12">
               <label className="text-sm">Weight</label>
-              <input type="number" id="weight-input" className="w-full border-b border-black focus:outline-none" />
+              <input type="number" id="weight-input" className="w-full border-b-2 border-white focus:outline-none bg-blue" />
             </div>
             {selection !== "Bodyweight" &&
               <div className="w-5/12">
                 <label className="text-sm">Reps</label>
-                <input type="number" id="reps-input" className="w-full border-b border-black focus:outline-none" />
+                <input type="number" id="reps-input" className="w-full border-b-2 border-white focus:outline-none bg-blue" />
               </div>
             }
           </form>
-          <div className="relative bg-gray-100 text-xl font-bold pl-4 py-2 rounded-lg" onClick={() => setSelectorOpen(!selectorOpen)}>{selection !== "" ? `${selection}` : "Select Type"}
-            <div className={`absolute z-10 top-full flex flex-col bg-gray-50 text-black px-4 py-2 whitespace-nowrap rounded-lg ring-1 ring-black ring-opacity-5 ${selectorOpen ? "" : "hidden"}`}>{listedTypes}</div>
-          </div>
           <button onClick={e => handleSubmit(e)} className="w-full mt-6 bg-orange text-xl text-white font-bold pl-4 py-2 rounded-lg focus:outline-none">Add</button>
         </div>
       }

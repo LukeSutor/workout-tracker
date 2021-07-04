@@ -81,6 +81,8 @@ export default function EditProfile(props) {
       .catch((error) => {
         console.log(error);
       });
+
+      props.history.push('/dashboard')
   }
 
   return (

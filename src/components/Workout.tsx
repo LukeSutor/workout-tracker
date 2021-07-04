@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Graph from './Graph'
 import dumbbell from './images/dumbbell.svg'
+import scale from './images/scale.svg'
 import downArrow from './images/black_downArrow.svg'
 
 export default function Workout(props) {
@@ -41,25 +42,25 @@ export default function Workout(props) {
   }
 
   return (
-    <div className="w-11/12 mx-auto bg-white my-8 shadow-lg rounded-xl overflow-hidden">
+    <div className="w-11/12 mx-auto bg-white mb-8 shadow-lg rounded-xl overflow-hidden">
       <div onClick={() => setExpanded(!expanded)}  className="flex flex-row py-6">
-        <img src={dumbbell} alt="" className="w-8 transform -rotate-45 ml-6" />
+        <img src={props.type === "Bodyweight" ? scale : dumbbell} alt="" className={`w-8 ml-6 ${props.type === "Bodyweight" ? "px-0.5" : "transform -rotate-45"}`} />
         <p className="text-2xl font-bold ml-8">{props.type}</p>
         <img src={downArrow} alt="" className={`w-5 ml-auto mr-6 ${expanded ? "transform rotate-180" : ""}`} />
       </div>
       {expanded &&
         <>
           <Graph data={props.data} type={props.type} />
-          <div className="flex flex-row justify-evenly">
+          <div className="flex flex-row justify-evenly mt-4">
             {!isNaN(calcMax()) &&
-              <div className="w-2/5 border border-black rounded-lg mb-6">
-                <p className="text-md text-gray-500 pl-2 pt-1">1 Rep Max:</p>
-                <p className="text-2xl text-center font-bold py-2">{calcMax()}</p>
+              <div className="w-2/5 border border-black text-center rounded-lg mb-6">
+                <p className="text-2xl font-bold pt-1">{calcMax()}</p>
+                <p className="text-md text-gray-500 pl-2 pb-2">1 Rep Max</p>
               </div>}
             {!isNaN(calcPBW()) &&
-              <div className="w-2/5 border border-black rounded-lg mb-6">
-                <p className="text-md text-gray-500 pl-2 pt-1">% Bodyweight</p>
-                <p className="text-2xl text-center font-bold py-2">{calcPBW()}%</p>
+              <div className="w-2/5 border border-black text-center rounded-lg mb-6">
+                <p className="text-2xl  font-bold pt-1">{calcPBW()}%</p>
+                <p className="text-md text-gray-500 pl-2 pb-2">% Bodyweight</p>
               </div>}
           </div>
         </>
