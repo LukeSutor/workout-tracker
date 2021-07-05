@@ -25,6 +25,7 @@ export default function Signup(props) {
 
   // Check localStorage to see if the person's profile is saved there
   useEffect(() => {
+    // document.body.appendChild(document.getElementsByTagName("form")[0]);
     document.title = "Sign Up | Workout Tracker"
 
     if (localStorage.length === 0) {
@@ -89,12 +90,11 @@ export default function Signup(props) {
             body: JSON.stringify(workout),
           })
             .then((res) => res.json())
-            .then(props.history.push('/dashboard'))
             .catch((error) => {
               console.error(error);
             });
-
-
+      
+      
           fetch("https://sheet.best/api/sheets/f9a8b3ec-30d1-429b-861c-2e885f120f02", {
             method: "POST",
             mode: "cors",
@@ -107,9 +107,9 @@ export default function Signup(props) {
             .catch((error) => {
               console.error(error);
             });
-
+      
           props.setProfile(profile)
-
+          props.history.push('/dashboard')
         } else {
           // If there is an account with that username already, the username taken modal is shown.
           setShowModal(true)
@@ -124,7 +124,7 @@ export default function Signup(props) {
   return (
     <div>
       <animated.p style={spring} className="mx-auto mt-5 w-min px-4 py-2 text-white font-semibold text-center bg-red-500 whitespace-nowrap rounded-lg">Username taken, please try again</animated.p>
-      <form className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col w-11/12 px-6 h-min bg-white rounded-lg -2 shadow-lg">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col w-11/12 px-6 h-min bg-white rounded-lg -2 shadow-lg">
         <h1 className="text-3xl text-center font-bold py-8">Welcome</h1>
         <label className="text-sm">Username</label>
         <input id="username-input" className="w-full border-b border-black focus:outline-none" />
@@ -137,7 +137,7 @@ export default function Signup(props) {
         <button onClick={e => handleSubmit(e)} className="w-full py-3 mt-6 mx-auto bg-orange text-xl text-white text-center font-bold rounded-lg whitespace-nowrap">Sign up</button>
         <p className="py-4 text-center">Already have an account? <button onClick={() => props.history.push('/login')}
           className="text-orange font-semibold">Log In</button></p>
-      </form>
+      </div>
     </div>
   )
 }
