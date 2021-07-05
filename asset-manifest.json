@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/workout-tracker/static/css/main.f522cf1d.chunk.css",
+    "main.js": "/workout-tracker/static/js/main.05d9d093.chunk.js",
+    "main.js.map": "/workout-tracker/static/js/main.05d9d093.chunk.js.map",
+    "runtime-main.js": "/workout-tracker/static/js/runtime-main.8b308e8f.js",
+    "runtime-main.js.map": "/workout-tracker/static/js/runtime-main.8b308e8f.js.map",
+    "static/js/2.2ac3ebb3.chunk.js": "/workout-tracker/static/js/2.2ac3ebb3.chunk.js",
+    "static/js/2.2ac3ebb3.chunk.js.map": "/workout-tracker/static/js/2.2ac3ebb3.chunk.js.map",
+    "static/js/3.d686575c.chunk.js": "/workout-tracker/static/js/3.d686575c.chunk.js",
+    "static/js/3.d686575c.chunk.js.map": "/workout-tracker/static/js/3.d686575c.chunk.js.map",
+    "index.html": "/workout-tracker/index.html",
+    "static/css/main.f522cf1d.chunk.css.map": "/workout-tracker/static/css/main.f522cf1d.chunk.css.map",
+    "static/js/2.2ac3ebb3.chunk.js.LICENSE.txt": "/workout-tracker/static/js/2.2ac3ebb3.chunk.js.LICENSE.txt",
+    "static/media/black_downArrow.6a3c2c89.svg": "/workout-tracker/static/media/black_downArrow.6a3c2c89.svg",
+    "static/media/downArrow.17c9b6db.svg": "/workout-tracker/static/media/downArrow.17c9b6db.svg",
+    "static/media/dumbbell.b0835252.svg": "/workout-tracker/static/media/dumbbell.b0835252.svg",
+    "static/media/plus.04b3f446.svg": "/workout-tracker/static/media/plus.04b3f446.svg",
+    "static/media/scale.36e4593e.svg": "/workout-tracker/static/media/scale.36e4593e.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8b308e8f.js",
+    "static/js/2.2ac3ebb3.chunk.js",
+    "static/css/main.f522cf1d.chunk.css",
+    "static/js/main.05d9d093.chunk.js"
+  ]
+}
