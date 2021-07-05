@@ -105,7 +105,7 @@ export default function EditProfile(props) {
   }
 
   return (
-    <div className="bg-background h-screen">
+    <div>
       <div className="bg-orange px-8 pt-4 pb-5 rounded-b-xl text-white shadow-lg">
         <button onClick={() => props.history.goBack()} className="flex flex-row">
           <img src={downArrow} alt="" className="w-4 mr-1 my-auto transform rotate-90" />

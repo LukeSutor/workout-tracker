@@ -15,7 +15,7 @@ export default function App() {
   });
 
   return (
-    <div className="bg-background">
+    <div>
       <HashRouter basename='/'>
         <Route exact path='/'>
           <Redirect to='/signup' />

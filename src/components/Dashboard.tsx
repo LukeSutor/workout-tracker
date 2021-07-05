@@ -43,8 +43,8 @@ export default function Dashboard(props) {
   );
 
   return (
-    <div className="bg-background">
-      <Header {...props} data={data} profile={props.profile} />
+    <div>
+      <Header {...props} data={data} profile={props.profile} setData={setData} />
       <div className="-mt-10 pb-32">{listedTypes}</div>
       <div className="fixed z-20 bottom-0">
         <AddSession types={types} profile={props.profile} setData={setData} />

@@ -56,8 +56,8 @@ export default function Login(props) {
   }
 
   return (
-    <div className="bg-background h-screen">
-      <animated.p style={spring} className="mx-auto mt-5 w-min px-4 py-2 text-white font-semibold text-center bg-red-500 whitespace-nowrap rounded-lg">Username and password don't match</animated.p>
+    <div>
+      <animated.p style={spring} className="mx-auto mt-5 w-min px-4 py-2 text-white font-semibold text-center bg-red-500 whitespace-nowrap rounded-lg">Incorrect credentials provided</animated.p>
       <form className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col w-11/12 px-6 h-min bg-white rounded-lg -2 shadow-lg">
         <h1 className="text-3xl text-center font-bold py-8">Welcome Back</h1>
         <label className="text-sm">Username</label>

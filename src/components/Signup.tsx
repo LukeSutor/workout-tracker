@@ -80,6 +80,21 @@ export default function Signup(props) {
       .then((data) => {
         if (data.length === 0) {
           // If there are no users found, the username is not taken and the account is created and the user is signed in        
+          fetch("https://sheet.best/api/sheets/801254c2-1797-4c47-a965-cd4c215ddc16", {
+            method: "POST",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(workout),
+          })
+            .then((res) => res.json())
+            .then(props.history.push('/dashboard'))
+            .catch((error) => {
+              console.error(error);
+            });
+
+
           fetch("https://sheet.best/api/sheets/f9a8b3ec-30d1-429b-861c-2e885f120f02", {
             method: "POST",
             mode: "cors",
@@ -95,19 +110,6 @@ export default function Signup(props) {
 
           props.setProfile(profile)
 
-          fetch("https://sheet.best/api/sheets/801254c2-1797-4c47-a965-cd4c215ddc16", {
-            method: "POST",
-            mode: "cors",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(workout),
-          })
-            .then((res) => res.json())
-            .then(props.history.push('/dashboard'))
-            .catch((error) => {
-              console.error(error);
-            });
         } else {
           // If there is an account with that username already, the username taken modal is shown.
           setShowModal(true)
@@ -120,7 +122,7 @@ export default function Signup(props) {
 
 
   return (
-    <div className="bg-background h-screen">
+    <div>
       <animated.p style={spring} className="mx-auto mt-5 w-min px-4 py-2 text-white font-semibold text-center bg-red-500 whitespace-nowrap rounded-lg">Username taken, please try again</animated.p>
       <form className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col w-11/12 px-6 h-min bg-white rounded-lg -2 shadow-lg">
         <h1 className="text-3xl text-center font-bold py-8">Welcome</h1>
