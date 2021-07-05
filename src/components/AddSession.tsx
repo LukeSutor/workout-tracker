@@ -4,7 +4,7 @@ import downArrow from './images/downArrow.svg'
 
 interface Workout {
   Date: number;
-  Email: string;
+  Username: string;
   Type: string;
   Weight: string;
   Reps: string;
@@ -21,7 +21,7 @@ export default function AddWorkout(props) {
     <p onClick={() => setSelection(type)} key={type} className="my-0.5">{type}</p>
   );
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
 
     let weight = (document.getElementById("weight-input") as HTMLInputElement).value
@@ -41,13 +41,13 @@ export default function AddWorkout(props) {
 
     let workout: Workout = {
       Date: Date.now(),
-      Email: props.profile.Email,
+      Username: props.profile.Username,
       Type: selection,
       Weight: weight,
       Reps: reps
     }
 
-    fetch("https://sheet.best/api/sheets/801254c2-1797-4c47-a965-cd4c215ddc16", {
+    await fetch("https://sheet.best/api/sheets/801254c2-1797-4c47-a965-cd4c215ddc16", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -56,12 +56,21 @@ export default function AddWorkout(props) {
       body: JSON.stringify(workout),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+      .catch((error) => {
+        console.error(error);
+      });
+
+    // Fetch current user's workout data
+    await fetch(`https://sheet.best/api/sheets/801254c2-1797-4c47-a965-cd4c215ddc16/Username/${props.profile.Username}`)
+      .then((res) => res.json())
+      .then((data) => {        
+        props.setData(data)
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
+
+    setExpanded(false)
   }
 
   return (

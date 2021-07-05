@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { animated, useSpring } from 'react-spring'
 import downArrow from './images/downArrow.svg'
 
 interface Profile {
-  Email: string;
   Username: string;
   Password: string;
   Types: string;
@@ -10,17 +10,19 @@ interface Profile {
 
 export default function EditProfile(props) {
 
-  const [email, setEmail] = useState(props.profile.Email)
   const [username, setUsername] = useState(props.profile.Username)
   const [password, setPassword] = useState(props.profile.Password)
   const [types, setTypes] = useState(props.profile.Types)
 
+
+  const [showModal, setShowModal] = useState(false)
+
+  const spring = useSpring({
+    opacity: showModal ? 1 : 0,
+  })
+
   function onChange(e) {
     switch (e.target.id) {
-      case "email-input":
-        setEmail(e.target.value)
-        break;
-
       case "username-input":
         setUsername(e.target.value)
         break;
@@ -56,33 +58,50 @@ export default function EditProfile(props) {
     e.preventDefault()
 
     let profile: Profile = {
-      Email: email,
       Username: username,
       Password: password,
       Types: types
     }
 
-    fetch(`https://sheet.best/api/sheets/f9a8b3ec-30d1-429b-861c-2e885f120f02/Email/${props.profile.Email}`, {
-      method: "PUT",
+    fetch(`https://sheet.best/api/sheets/f9a8b3ec-30d1-429b-861c-2e885f120f02/Username/${username}`, {
+      method: "GET",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(profile),
     })
-      .then((r) => r.json())
+      .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if (data.length === 0) {
+          // If there are no users found, the username is not taken and the account is updated       
+          fetch(`https://sheet.best/api/sheets/f9a8b3ec-30d1-429b-861c-2e885f120f02/Username/${props.profile.Username}`, {
+            method: "PUT",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(profile),
+          })
+            .then((r) => r.json())
+            .then((data) => {
+              props.setProfile(data[0])
 
-        props.setProfile(data[0])
+              localStorage.clear()
+            })
+            .catch((error) => {
+              console.error(error);
+            });
 
-        localStorage.clear()
+          props.setProfile(profile)
+          props.history.push('/dashboard')
+        } else {
+          // If there is an account with that username already, the username taken modal is shown.
+          setShowModal(true)
+        }
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
-
-      props.history.push('/dashboard')
   }
 
   return (
@@ -93,10 +112,9 @@ export default function EditProfile(props) {
           <p className="text-lg font-semibold">Back</p>
         </button>
       </div>
+      <animated.p style={spring} className="mx-auto mt-5 w-min px-4 py-2 text-white font-semibold text-center bg-red-500 whitespace-nowrap rounded-lg">Username taken, please try again</animated.p>
       <form className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col w-11/12 px-6 h-min bg-white rounded-lg -2 shadow-lg">
         <h1 className="text-3xl text-center font-bold py-8">Edit Profile</h1>
-        <label className="text-sm">Email</label>
-        <input id="email-input" onChange={e => onChange(e)} value={email} className="w-full border-b border-black focus:outline-none" />
         <label className="text-sm pt-4">Username</label>
         <input id="username-input" onChange={e => onChange(e)} value={username} className="w-full border-b border-black focus:outline-none" />
         <label className="text-sm pt-4">Password</label>

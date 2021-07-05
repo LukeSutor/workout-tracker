@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from './Header'
 import Workout from './Workout'
-import AddWorkout from './AddWorkout'
+import AddSession from './AddSession'
 
 export default function Dashboard(props) {
+
+  const [data, setData] = useState([])
 
   useEffect(() => {
     if (props.profile?.Username === "") {
@@ -14,31 +16,26 @@ export default function Dashboard(props) {
         props.setProfile(profile[0])
       }
     }
-    // Fetch current user's workout data
+        
+    // Only fetch userdata if the profile has been gotten, this prevents unnecessary fetches to the database
+    if(props.profile.Username !== "") {
+      // Fetch current user's workout data
+      fetch(`https://sheet.best/api/sheets/801254c2-1797-4c47-a965-cd4c215ddc16/Username/${props.profile.Username}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setData(data)
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
 
-    // fetch(`https://sheet.best/api/sheets/801254c2-1797-4c47-a965-cd4c215ddc16/Person/${props.user}`)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
     // eslint-disable-next-line
-  }, [])
+  }, [props.profile])
 
   useEffect(() => {
     document.title = `${props.profile?.Username}'s Dashboard | Workout Tracker`
   }, [props.profile])
-
-
-  let data = [
-    { Date: "1620269894340", Person: "Luke Sutor", Reps: "2", Type: "Bench Press", Weight: "225" },
-    { Date: "1625185346674", Person: "Luke Sutor", Reps: "-1", Type: "Bodyweight", Weight: "209" },
-    { Date: "1625185446674", Person: "Luke Sutor", Reps: "8", Type: "Bench Press", Weight: "185" },
-    { Date: "1625185546974", Person: "Luke Sutor", Reps: "5", Type: "Bench Press", Weight: "205" }
-  ]
-
 
   let types: string[] = props.profile?.Types.split(',')
   const listedTypes = types?.map((type) =>
@@ -46,11 +43,11 @@ export default function Dashboard(props) {
   );
 
   return (
-    <div>
+    <div className="bg-background">
       <Header {...props} data={data} profile={props.profile} />
-      <div className="-mt-10">{listedTypes}</div>
+      <div className="-mt-10 pb-32">{listedTypes}</div>
       <div className="fixed z-20 bottom-0">
-        <AddWorkout types={types} profile={props.profile} />
+        <AddSession types={types} profile={props.profile} setData={setData} />
       </div>
     </div>
   )
