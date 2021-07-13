@@ -137,7 +137,7 @@ export default function Header(props) {
   return (
     <div className="bg-orange px-8 py-4 rounded-b-xl text-white shadow-lg">
       <div className="flex flex-row justify-between">
-        <h1 className="text-lg font-semibold">Dashboard</h1>
+        <h1 className="text-lg md:text-xl font-semibold">Dashboard</h1>
         <div onClick={() => setProfileOpen(!profileOpen)}
           className="relative text-lg focus:outline-none inline-flex">{props.profile?.Username}
           <img className={`w-6 my-auto ${profileOpen ? "pr-2 transform rotate-180" : "pl-2"}`} src={downArrow} alt="" />
@@ -147,18 +147,18 @@ export default function Header(props) {
           </div>
         </div>
       </div>
-      <p className="mt-4 mb-6 text-3xl font-bold">{today.toDateString()}</p>
+      <p className="mt-4 mb-6 text-3xl md:text-5xl font-bold">{today.toDateString()}</p>
       <div className="flex flex-row justify-between mb-12">
         <div>
-          <p className="text-lg font-thin">Weight</p>
-          <p className="text-3xl font-semibold">{weight === "-1" ? "No data" : weight}
-            <span className="text-base font-normal">{weight === "-1" ? "" : "lbs"}</span></p>
+          <p className="text-lg md:text-xl font-thin">Weight</p>
+          <p className="text-3xl md:text-4xl font-semibold">{weight === "-1" ? "No data" : weight}
+            <span className="text-base md:text-lg font-normal">{weight === "-1" ? "" : "lbs"}</span></p>
         </div>
         <div>
-          <p className="text-lg text-right font-thin">Weight Goal</p>
+          <p className="text-lg md:text-xl font-thin">Weight Goal</p>
           {weightGoal !== "-1" ?
-            <p className="text-3xl text-right font-semibold">{weightGoal}
-              <span className="text-base font-normal">{weightGoal === "-1" ? "" : "lbs"}</span></p>
+            <p className="text-3xl md:text-4xl text-right font-semibold">{weightGoal}
+              <span className="text-base md:text-lg font-normal">{weightGoal === "-1" ? "" : "lbs"}</span></p>
             :
             <>
               <div className="relative">

@@ -113,7 +113,7 @@ export default function EditProfile(props) {
         </button>
       </div>
       <animated.p style={spring} className="mx-auto mt-5 w-min px-4 py-2 text-white font-semibold text-center bg-red-500 whitespace-nowrap rounded-lg">Username taken, please try again</animated.p>
-      <form className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col w-11/12 px-6 h-min bg-white rounded-lg -2 shadow-lg">
+      <form className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col w-11/12 lg:w-2/3 px-6 lg:px-16 h-min bg-white rounded-lg -2 shadow-lg">
         <h1 className="text-3xl text-center font-bold py-8">Edit Profile</h1>
         <label className="text-sm pt-4">Username</label>
         <input id="username-input" onChange={e => onChange(e)} value={username} className="w-full border-b border-black focus:outline-none" />
@@ -121,7 +121,7 @@ export default function EditProfile(props) {
         <input id="password-input" onChange={e => onChange(e)} value={password} className="w-full border-b border-black focus:outline-none" />
         <label className="text-sm pt-4">Workouts to track (comma separated)</label>
         <input id="types-input" onChange={e => onChange(e)} value={types} className="w-full border-b border-black focus:outline-none" />
-        <button onClick={e => handleSubmit(e)} className="w-full py-3 mb-4 mt-6 mx-auto bg-orange text-xl text-white text-center font-bold rounded-lg whitespace-nowrap">Submit</button>
+        <button onClick={e => handleSubmit(e)} className="w-full py-3 mb-4 lg:mb-8 mt-6 mx-auto bg-orange text-xl text-white text-center font-bold rounded-lg whitespace-nowrap">Submit</button>
       </form>
     </div>
   )

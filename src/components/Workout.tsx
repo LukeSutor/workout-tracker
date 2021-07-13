@@ -42,7 +42,7 @@ export default function Workout(props) {
   }
 
   return (
-    <div className="w-11/12 mx-auto bg-white mb-8 shadow-lg rounded-xl overflow-hidden">
+    <div className="w-11/12 lg:w-3/4 mx-auto bg-white mb-8 shadow-lg rounded-xl overflow-hidden">
       <div onClick={() => setExpanded(!expanded)}  className="flex flex-row py-6">
         <img src={props.type === "Bodyweight" ? scale : dumbbell} alt="" className={`w-8 ml-6 ${props.type === "Bodyweight" ? "px-0.5" : "transform -rotate-45"}`} />
         <p className="text-2xl font-bold ml-8">{props.type}</p>

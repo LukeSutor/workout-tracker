@@ -46,7 +46,7 @@ export default function Signup(props) {
     let username = (document.getElementById("username-input") as HTMLInputElement).value
     let password = (document.getElementById("password-input") as HTMLInputElement).value
     let weight = (document.getElementById("weight-input") as HTMLInputElement).value
-    let types = (document.getElementById("types-input") as HTMLInputElement).value
+    let types = (document.getElementById("types-input") as HTMLInputElement).value    
 
     if (username === "" || password === "" || weight === "" || types === "") {
       (document.getElementById("username-input") as HTMLInputElement).placeholder = "Required Field";
@@ -124,7 +124,7 @@ export default function Signup(props) {
   return (
     <div>
       <animated.p style={spring} className="mx-auto mt-5 w-min px-4 py-2 text-white font-semibold text-center bg-red-500 whitespace-nowrap rounded-lg">Username taken, please try again</animated.p>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col w-11/12 px-6 h-min bg-white rounded-lg -2 shadow-lg">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col w-11/12 lg:w-2/3 px-6 lg:px-16 h-min bg-white rounded-lg -2 shadow-lg">
         <h1 className="text-3xl text-center font-bold py-8">Welcome</h1>
         <label className="text-sm">Username</label>
         <input id="username-input" className="w-full border-b border-black focus:outline-none" />

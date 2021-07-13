@@ -63,7 +63,7 @@ export default function AddWorkout(props) {
     // Fetch current user's workout data
     await fetch(`https://sheet.best/api/sheets/801254c2-1797-4c47-a965-cd4c215ddc16/Username/${props.profile.Username}`)
       .then((res) => res.json())
-      .then((data) => {        
+      .then((data) => {
         props.setData(data)
       })
       .catch((error) => {
@@ -82,22 +82,24 @@ export default function AddWorkout(props) {
       </div>
       {expanded &&
         <div className="px-6">
-          <div className="relative bg-blue-light text-xl font-bold pl-4 py-2 mb-6 mt-2 rounded-lg" onClick={() => setSelectorOpen(!selectorOpen)}>
-            {selection !== "" ? `${selection}` : "Select Type"}
-            <div className={`absolute z-10 top-full max-h-32 overflow-scroll flex flex-col bg-blue-light text-white px-4 py-2 whitespace-nowrap rounded-lg ring-1 ring-black ring-opacity-5 ${selectorOpen ? "" : "hidden"}`}>{listedTypes}</div>
-          </div>
-          <form className={`flex flex-row pb-4 ${selection === "Bodyweight" ? "" : "justify-between"}`}>
-            <div className="w-5/12">
-              <label className="text-sm">Weight</label>
-              <input type="number" id="weight-input" className="w-full border-b-2 border-white focus:outline-none bg-blue" />
+          <div className="md:flex flex-row justify-evenly">
+            <div className="relative md:w-1/4 bg-blue-light text-sm md:text-xl font-bold pl-4 py-2 mb-6 mt-2 rounded-lg" onClick={() => setSelectorOpen(!selectorOpen)}>
+              {selection !== "" ? `${selection}` : "Select Type"}
+              <div className={`absolute z-10 top-full max-h-32 md:max-h-24 overflow-y-scroll flex flex-col bg-blue-light text-white px-4 py-2 whitespace-nowrap rounded-lg ring-1 ring-black ring-opacity-5 ${selectorOpen ? "" : "hidden"}`}>{listedTypes}</div>
             </div>
-            {selection !== "Bodyweight" &&
+            <form className={`flex flex-row pb-4 md:w-1/4 ${selection === "Bodyweight" ? "" : "justify-between"}`}>
               <div className="w-5/12">
-                <label className="text-sm">Reps</label>
-                <input type="number" id="reps-input" className="w-full border-b-2 border-white focus:outline-none bg-blue" />
+                <label className="text-sm">Weight</label>
+                <input type="number" id="weight-input" className="w-full border-b-2 border-white focus:outline-none bg-blue" />
               </div>
-            }
-          </form>
+              {selection !== "Bodyweight" &&
+                <div className="w-5/12">
+                  <label className="text-sm">Reps</label>
+                  <input type="number" id="reps-input" className="w-full border-b-2 border-white focus:outline-none bg-blue" />
+                </div>
+              }
+            </form>
+          </div>
           <button onClick={e => handleSubmit(e)} className="w-full mt-6 bg-orange text-xl text-white font-bold pl-4 py-2 rounded-lg focus:outline-none">Add</button>
         </div>
       }
